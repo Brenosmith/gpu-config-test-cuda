@@ -1,22 +1,23 @@
 # Teste de GPU NVIDIA com CUDA e PyTorch
 
-Este projeto verifica se o PyTorch consegue acessar a GPU NVIDIA usando CUDA no
-Windows. O arquivo de teste é o [main.py](main.py).
+Este tutorial verifica se o PyTorch consegue acessar uma GPU NVIDIA usando CUDA
+no Windows.
 
 ## Pré-requisitos
 
 - Windows com uma GPU NVIDIA compatível com CUDA.
 - Driver da NVIDIA instalado.
-- Python instalado no projeto.
-- Ambiente virtual `.venv` criado na raiz do projeto.
+- Python instalado.
+- Ambiente virtual `.venv` criado no diretório de trabalho.
 
-Para confirmar a versão de CUDA suportada pelo driver, execute no PowerShell:
+Para consultar a versão máxima de CUDA compatível com o driver, execute:
 
 ```powershell
 nvidia-smi
 ```
 
-Consulte a linha `CUDA Version` exibida no resultado.
+Consulte a linha `CUDA Version`. Essa versão representa a capacidade do driver,
+não necessariamente uma instalação do CUDA Toolkit.
 
 ## Configuração da GPU
 
@@ -24,7 +25,7 @@ Consulte a linha `CUDA Version` exibida no resultado.
 
 1. Abra o **NVIDIA Control Panel**.
 2. Acesse **Gerenciar as configurações em 3D** > **Configurações do Programa**.
-3. Adicione o `python.exe` localizado dentro do `.venv` deste projeto.
+3. Adicione o `python.exe` localizado dentro do `.venv`.
 4. Em **Processador gráfico preferido**, selecione **Processador NVIDIA de alto desempenho**.
 5. Em **Modo de gerenciamento de energia**, selecione **Preferência por desempenho máximo**.
 
@@ -37,20 +38,26 @@ Consulte a linha `CUDA Version` exibida no resultado.
 
 ## Instalação do PyTorch
 
-Instale o PyTorch usando a combinação de versão do sistema operacional, versão
-do Python e versão CUDA recomendada na página oficial:
+Instale o PyTorch usando a combinação de sistema operacional, Python e CUDA
+disponível na página oficial:
 
 [Instalação do PyTorch](https://pytorch.org/get-started/locally/)
 
-Ao escolher a versão CUDA, prefira a versão estável mais adequada ao seu
-ambiente. Por exemplo, se houver opções 12.6, 12.8 e 13.0, use 12.6 somente
-quando ela for compatível com o driver e com a versão do PyTorch escolhida.
-
-Exemplo de ativação do ambiente virtual:
+O PyTorch não precisa oferecer exatamente a mesma versão indicada pelo
+`nvidia-smi`. Por exemplo, se o driver indicar CUDA 13.4 e a página oferecer
+CUDA 13.2, use CUDA 13.2:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
+
+```powershell
+python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu132
+```
+
+O pacote do PyTorch já inclui as bibliotecas CUDA necessárias. Não é preciso
+instalar o CUDA Toolkit separadamente apenas para executar modelos, como o
+Whisper large-v3.
 
 ## Executar o teste
 
@@ -66,22 +73,8 @@ Ou execute diretamente o Python do ambiente virtual:
 .\.venv\Scripts\python.exe main.py
 ```
 
-O script imprime:
-
-1. `True` se o PyTorch detectar CUDA.
-2. O nome da GPU detectada, por exemplo `NVIDIA GeForce MX230`.
-
-Saída esperada:
-
-```text
-True
-NVIDIA GeForce MX230
-```
+O script imprime `True` se o PyTorch detectar CUDA e o nome da GPU detectada.
 
 Se `torch.cuda.is_available()` retornar `False`, a GPU não está disponível para
 o PyTorch. Verifique o driver, a instalação do PyTorch com CUDA e se o Python
 executado é o mesmo Python configurado no Painel da NVIDIA e no Windows.
-
-> O `main.py` atual foi feito para testar uma GPU CUDA disponível. Embora o
-> PyTorch também possa executar em CPU, o script ainda não seleciona CPU como
-> alternativa quando CUDA não é encontrada.
