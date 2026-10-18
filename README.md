@@ -37,7 +37,7 @@ CUDA 13.2, use CUDA 13.2:
 No link do PyTorch será fornecido um comando semelhando ao abaixo:
 
 ```cmd
-# exemplo
+REM exemplo
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu132
 ```
 
