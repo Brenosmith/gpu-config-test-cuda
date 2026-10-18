@@ -19,23 +19,6 @@ nvidia-smi
 Consulte a linha `CUDA Version`. Essa versão representa a capacidade do driver,
 não necessariamente uma instalação do CUDA Toolkit.
 
-## Configuração da GPU
-
-### Painel de Controle da NVIDIA
-
-1. Abra o **NVIDIA Control Panel**.
-2. Acesse **Gerenciar as configurações em 3D** > **Configurações do Programa**.
-3. Adicione o `python.exe` localizado dentro do `.venv`.
-4. Em **Processador gráfico preferido**, selecione **Processador NVIDIA de alto desempenho**.
-5. Em **Modo de gerenciamento de energia**, selecione **Preferência por desempenho máximo**.
-
-### Configurações gráficas do Windows 11
-
-1. Abra **Configurações** com `Win + I`.
-2. Acesse **Sistema** > **Tela** > **Elementos gráficos**.
-3. Adicione o `python.exe` localizado dentro do `.venv`.
-4. Selecione o programa, clique em **Opções** e escolha **Alto desempenho**.
-
 ## Instalação do PyTorch
 
 Instale o PyTorch usando a combinação de sistema operacional, Python e CUDA
@@ -75,6 +58,27 @@ Ou execute diretamente o Python do ambiente virtual:
 
 O script imprime `True` se o PyTorch detectar CUDA e o nome da GPU detectada.
 
-Se `torch.cuda.is_available()` retornar `False`, a GPU não está disponível para
-o PyTorch. Verifique o driver, a instalação do PyTorch com CUDA e se o Python
-executado é o mesmo Python configurado no Painel da NVIDIA e no Windows.
+Se `torch.cuda.is_available()` retornar `False`, verifique primeiro o driver, a
+instalação do PyTorch com CUDA e se o Python executado é o mesmo Python do
+ambiente virtual. Se necessário, siga a seção de configurações opcionais abaixo
+e execute o teste novamente.
+
+## Configuração opcional da GPU
+
+Em muitos computadores, basta instalar o PyTorch e executar o teste. Faça as
+configurações abaixo somente se o PyTorch não detectar a GPU.
+
+### Painel de Controle da NVIDIA
+
+1. Abra o **NVIDIA Control Panel**.
+2. Acesse **Gerenciar as configurações em 3D** > **Configurações do Programa**.
+3. Adicione o `python.exe` localizado dentro do `.venv`.
+4. Em **Processador gráfico preferido**, selecione **Processador NVIDIA de alto desempenho**.
+5. Em **Modo de gerenciamento de energia**, selecione **Preferência por desempenho máximo**.
+
+### Configurações gráficas do Windows 11
+
+1. Abra **Configurações** com `Win + I`.
+2. Acesse **Sistema** > **Tela** > **Elementos gráficos**.
+3. Adicione o `python.exe` localizado dentro do `.venv`.
+4. Selecione o programa, clique em **Opções** e escolha **Alto desempenho**.
