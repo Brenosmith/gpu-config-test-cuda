@@ -12,7 +12,7 @@ no Windows.
 
 Para consultar a versão máxima de CUDA compatível com o driver, execute:
 
-```powershell
+```cmd
 nvidia-smi
 ```
 
@@ -30,11 +30,14 @@ O PyTorch não precisa oferecer exatamente a mesma versão indicada pelo
 `nvidia-smi`. Por exemplo, se o driver indicar CUDA 13.4 e a página oferecer
 CUDA 13.2, use CUDA 13.2:
 
-```powershell
-.\.venv\Scripts\Activate.ps1
+```cmd
+.\.venv\Scripts\activate.bat
 ```
 
-```powershell
+No link do PyTorch será fornecido um comando semelhando ao abaixo:
+
+```cmd
+# exemplo
 python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu132
 ```
 
@@ -46,13 +49,13 @@ Whisper large-v3.
 
 Com o ambiente virtual ativado, execute:
 
-```powershell
+```cmd
 python main.py
 ```
 
 Ou execute diretamente o Python do ambiente virtual:
 
-```powershell
+```cmd
 .\.venv\Scripts\python.exe main.py
 ```
 
